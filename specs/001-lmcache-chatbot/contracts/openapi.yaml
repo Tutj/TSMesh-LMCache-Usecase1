@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  title: Multi-Turn Conversational AI API
+  version: 1.0.0
+  description: API for the multi-turn conversational AI assistant.
+
+paths:
+  /conversations:
+    post:
+      summary: Start a new conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: The initial prompt from the user.
+      responses:
+        '200':
+          description: A new conversation was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+
+  /conversations/{conversation_id}/turns:
+    post:
+      summary: Continue a conversation
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: The user's prompt for this turn.
+      responses:
+        '200':
+          description: A new turn was successfully added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Turn'
+
+components:
+  schemas:
+    Conversation:
+      type: object
+      properties:
+        conversation_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        turns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Turn'
+    Turn:
+      type: object
+      properties:
+        turn_id:
+          type: string
+          format: uuid
+        conversation_id:
+          type: string
+          format: uuid
+        user_prompt:
+          type: string
+        chatbot_response:
+          type: string
+        agent_name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        metrics:
+          type: object
+          properties:
+            ttft:
+              type: number
+            latency:
+              type: number
+            cache_hit:
+              type: boolean
