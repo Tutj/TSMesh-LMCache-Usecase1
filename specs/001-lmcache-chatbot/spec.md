@@ -1,8 +1,6 @@
 # Feature Specification: Multi-Turn Conversational AI with LMCACHE
 
-**Feature Branch**: `001-lmcache-chatbot`
-**Created**: 2026-02-06
-**Status**: Draft
+
 **Input**: User description: "A multi-turn chatbot/conversational AI assistant that supports customers with multi turn conversation. It should leverage the inferencing engine integrated with lmcache. The value should show is: ttft decreasing 88%, cache hit rate: 87% for repeated prompts, CPU decrease for computing time around 70% for the long conversation. The architecture may include multiple specialized experts as agents with the help of a router. In the tutorial of helping building this solution, it should prove how KV Caching works at the inference level baout Prefix Alignment (You must structure your prompt templates so that the large "Manual" remains a fixed prefix across all agents)."
 
 ## User Scenarios & Testing *(mandatory)*
